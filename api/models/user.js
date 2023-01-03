@@ -12,11 +12,11 @@ const useSchema = new Schema({
   },
   name: {
     type: String,
-    reqd: true,
+    required: true,
   },
   status: {
     type: String,
-    required: true,
+    default: "I am new!",
   },
   posts: [
     {
