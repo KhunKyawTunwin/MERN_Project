@@ -78,17 +78,8 @@ mongoose
 //  391 half
 //
 
-// hello new commit
-// hello new commit
-// hello new commit
-// hello new commit 1
-// hello new commit 2
-// hello new commit 3
-// hello new commit 4
-// hello new commit 5
-// hello new commit 6
-// hello new commit 7
 /* 
+
 389. How Does Authentication Work?
 Well we obviously still have our client and server and the client still sends authentication data to the server,so the email and the password let's say. In the past, we then would have checked that data on the server and if it is valid, we would have established a session.Now we don't use a session anymore because restful APIs are stateless,they don't care about the client,
 you learned about that strict decoupling of server and client and every request should be treated standalone,that means every request should have all the data it needs to authenticate itself. With a session,
