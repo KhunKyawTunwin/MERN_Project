@@ -15,14 +15,14 @@ const fileStorage = multer.diskStorage({
     cb(null, "images");
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + "_" + file.originalname);
+    cb(null, new Date().toISOString() + "-" + file.originalname);
   },
 });
 
 const fileFilter = (req, file, cb) => {
   if (
     file.mimetype === "image/png" ||
-    file.mimetype === "image/jgp" ||
+    file.mimetype === "image/jpg" ||
     file.mimetype === "image/jpeg"
   ) {
     cb(null, true);
@@ -32,11 +32,11 @@ const fileFilter = (req, file, cb) => {
 };
 
 // app.use(bodyParser.urlencoded()); // x-www-form-urlencoded <form>
-app.use(bodyParser.json()); // application / json
+app.use(bodyParser.json()); // application/json
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
 );
-app.use("/images", express.static(path.join(__dirname, "/images")));
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -64,19 +64,23 @@ mongoose
     "mongodb+srv://udemyproject:udemydb1009@cluster0.9gx2eko.mongodb.net/messages?retryWrites=true"
   )
   .then((result) => {
-    app.listen(8080, () => {
-      console.log("Server running at port 8080!");
+    const server = app.listen(8080);
+    const io = require("./socket").init(server);
+    io.on("connection", (socket) => {
+      console.log("Client connected");
     });
   })
   .catch((err) => console.log(err));
 
+//
 //  376
 //  382 -> 383
 // 384
 // 387 https://github.com/KhunKyawTunwin/udemyfullcourse.git
-
 //  391 half
 //
+// 408
+//410
 
 /* 
 
