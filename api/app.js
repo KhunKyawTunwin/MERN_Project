@@ -59,12 +59,14 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message: message, data: data });
 });
 
+const PORT = 5000;
 mongoose
   .connect(
     "mongodb+srv://udemyproject:udemydb1009@cluster0.9gx2eko.mongodb.net/messages?retryWrites=true"
   )
   .then((result) => {
-    const server = app.listen(8080);
+    const server = app.listen(PORT || 8080);
+    console.log(`Server running at Port http://localhost:${PORT} `);
     const io = require("./socket").init(server);
     io.on("connection", (socket) => {
       console.log("Client connected");

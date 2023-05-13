@@ -11,9 +11,9 @@ exports.signup = async (req, res, next) => {
     error.data = errors.array();
     throw error;
   }
-  const email = req.body.email;
-  const name = req.body.name;
-  const password = req.body.password;
+  // const email = req.body.email;
+  // const name = req.body.name;
+  const { email, name, password } = req.body;
   try {
     const hashedPw = await bcrypt.hash(password, 12);
 
@@ -33,8 +33,8 @@ exports.signup = async (req, res, next) => {
 };
 
 exports.login = async (req, res, next) => {
-  const email = req.body.email;
-  const password = req.body.password;
+  const { email, password } = req.body;
+
   let loadedUser;
   try {
     const user = await User.findOne({ email: email });
