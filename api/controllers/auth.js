@@ -1,4 +1,4 @@
-const { validationResult } = require("express-validator/check");
+const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -44,12 +44,15 @@ exports.login = async (req, res, next) => {
       throw error;
     }
     loadedUser = user;
+
     const isEqual = await bcrypt.compare(password, user.password);
+
     if (!isEqual) {
       const error = new Error("Wrong password!");
       error.statusCode = 401;
       throw error;
     }
+
     const token = jwt.sign(
       {
         email: loadedUser.email,

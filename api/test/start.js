@@ -1,6 +1,5 @@
 /* 
-
-          // Normal function
+  // Normal function
           function nameData() {
             return;
           }
@@ -11,8 +10,7 @@
           // named function
 
           const nameOne = () => {};
-
-
+          
  */
 
 /* 

@@ -67,6 +67,7 @@ mongoose
   .then((result) => {
     const server = app.listen(PORT || 8080);
     console.log(`Server running at Port http://localhost:${PORT} `);
+
     const io = require("./socket").init(server);
     io.on("connection", (socket) => {
       console.log("Client connected");

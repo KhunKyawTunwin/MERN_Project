@@ -42,11 +42,14 @@ describe("Auth_Midddleware", () => {
         return "Bearer 29ndjd$%93738jhsd/399929"; // real return token from generate!
       },
     };
-    jwt.verify = () => {
-      return { userId: "ourtokeninproject" };
-    };
+
+    sinon.stub(jwt, "verify");
+    jwt.verify.returns({ userId: "29ndjd$%93738jhsd/399929" });
     authMiddleware(req, {}, () => {});
     expect(req).to.have.property("userId");
+    expect(req).to.have.property("userId", "29ndjd$%93738jhsd/399929");
+    expect(jwt.verify.called).to.be.true;
+    jwt.verify.restore();
   });
 
   it("Should throw an error if the token cannot be verified", () => {
